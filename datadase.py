@@ -1,7 +1,11 @@
 """
 ТЕСТЫ
->>> NewUser('Maga', 89995490719)
+>>> User('Maga', 89995490719)
 Maga 89995490719
+
+>>> UserMessageTable(1)
+таблица пользователя создана
+
 """
 
 import sqlite3
@@ -19,8 +23,7 @@ with sqlite3.connect('database.db') as db:
 
 
 #   СОЗДАЕМ ЛОГИКУ СОЗДАНИЯ - ПОИСКА id  в базе данных проверки создан ли пользователь
-def User(Username='erik', Num=891234):
-    print(Username, Num)
+def User(username='erik', usernumber=891234):
     try:
         db.cursor()
     except:
@@ -28,11 +31,9 @@ def User(Username='erik', Num=891234):
 
 
 #   СОЗДАЕМ ДЛЯ ПОЛЬЗОВАТЕЛЯ ТАБЛИЦУ С ЕГО СООБЩЕНИЯМИ
-def UserMessageTable():
+def UserMessageTable(identifier):
     pass
 
-
-User()
 
 if __name__ == "__main__":
     import doctest
