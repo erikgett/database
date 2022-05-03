@@ -6,7 +6,7 @@ Maga 89995490719
 
 import sqlite3
 
-#  СОЗДАЁМ ВСЕ НЕОБХОДИМЫЕ ТАБЛИЧКИ
+#  СОЗДАЁМ ТАБЛИЦУ ПОЛЬЗОВАТЕЛЕЙ
 with sqlite3.connect('database.db') as db:
     cursor = db.cursor()
     query = '''
@@ -32,7 +32,7 @@ def UserMessageTable():
     pass
 
 
-NewUser()
+User()
 
 if __name__ == "__main__":
     import doctest
