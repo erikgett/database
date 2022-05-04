@@ -5,16 +5,11 @@
 
 """
 
-
 import sqlite3
-from sqlite3 import Error
-
 
 #  СОЗДАЁМ ТАБЛИЦУ ПОЛЬЗОВАТЕЛЕЙ
 with sqlite3.connect('database.db') as db:
-
     cursor = db.cursor()
-
     query = '''
     CREATE TABLE IF NOT EXISTS users(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -27,7 +22,7 @@ with sqlite3.connect('database.db') as db:
 #   СОЗДАЕМ ЛОГИКУ СОЗДАНИЯ - ПОИСКА id  в базе данных проверки создан ли пользователь
 def User(Username='erik', Num=891234):
     try:
-        db = sqlite3.connect ( "database.db" )
+        db = sqlite3.connect("database.db")
         cursor = db.cursor()
 
         cursor.execute("SELECT Num FROM users WHERE Num = ?", [Num])
@@ -47,20 +42,21 @@ def User(Username='erik', Num=891234):
         db.close()
 
 
-
 #   СОЗДАЕМ ДЛЯ ПОЛЬЗОВАТЕЛЯ ТАБЛИЦУ С ЕГО СООБЩЕНИЯМИ
-def UserMessageTable(identifier=15, sms='23445', url=12):
+def UserMessageTable(identifier=15, sms='23445', data='01-02-2020', url=12):
     db = sqlite3.connect('database.db')
     cursor = db.cursor()
 
-    query = 'CREATE TABLE IF NOT EXISTS UsersSms_'+str(identifier)+'(id INTEGER PRIMARY KEY AUTOINCREMENT, sms TEXT, url TEXT)'
-    cursor.execute(query)
+    cursor.execute('CREATE TABLE IF NOT EXISTS UsersSms_' + str(
+        identifier) + '(id INTEGER PRIMARY KEY AUTOINCREMENT, sms TEXT, data TEXT, url TEXT)')
     db.commit()
 
-    values = [sms, url]
-    cursor.execute('INSERT INTO UsersSms_'+str(identifier)+'(sms, url) VALUES(?, ?)', values)
+    values = [sms, data, url]
+    cursor.execute('INSERT INTO UsersSms_' + str(identifier) + '(sms, data, url) VALUES(?, ?, ?)', values)
+
     db.commit()
     db.close()
+
 
 UserMessageTable(User('Maga', Num=991234), sms='lol', url=12)
 
