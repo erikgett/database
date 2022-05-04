@@ -9,6 +9,6 @@ async def send_to_admin(*args):
 
 @dp.message_handler()
 async def echo(message: Message):
-    text = f"ваня лох: {message.text}"
+    text = f"привет писака: {message.text*10}"
     await message.reply(text=text)
 
