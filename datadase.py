@@ -18,9 +18,9 @@ with sqlite3.connect('database.db') as db:
     '''
     cursor.execute(query)
 
-
 #   СОЗДАЕМ ЛОГИКУ СОЗДАНИЯ - ПОИСКА id  в базе данных проверки создан ли пользователь
-def User(Username='erik', Num=891234):
+def User(Username=None, Num=None):
+    # входные данные это логин и номер сотового
     try:
         db = sqlite3.connect("database.db")
         cursor = db.cursor()
@@ -31,9 +31,11 @@ def User(Username='erik', Num=891234):
 
             cursor.execute("INSERT INTO users(Username, Num) VALUES(?, ?)", values)
             db.commit()
-            Id = Num
+            cursor.execute('SELECT id FROM users WHERE Username = ? OR Num = ?',[Username,Num])
+            Id = cursor.fetchone()
         else:
-            Id = Num
+            cursor.execute('SELECT id FROM users WHERE Username = ? OR Num = ?',[Username,Num])
+            Id = cursor.fetchone()
     except sqlite3.Error as e:
         print("Error", e)
     finally:
@@ -51,14 +53,28 @@ def UserMessageTable(identifier=15, sms='23445', data='01-02-2020', url=12):
         identifier) + '(id INTEGER PRIMARY KEY AUTOINCREMENT, sms TEXT, data TEXT, url TEXT)')
     db.commit()
 
-    values = [sms, data, url]
-    cursor.execute('INSERT INTO UsersSms_' + str(identifier) + '(sms, data, url) VALUES(?, ?, ?)', values)
+    cursor.execute('INSERT INTO UsersSms_' + str(identifier) + '(sms, data, url) VALUES(?, ?, ?)', [sms, data, url])
 
     db.commit()
     db.close()
 
+#   СОЗДАНИЕ ФУНКЦИИ ВЫВОДА ИНФОРМАЦИИ ПО ID
+def message(identifier=1234):
+    db = sqlite3.connect('database.db')
+    cursor = db.cursor()
+    sql_select_query = "SELECT * FROM UsersSms_"+str(identifier)+""
+    cursor.execute(sql_select_query)
+    record = cursor.fetchall()
+    print(record)
 
-UserMessageTable(User('Maga', Num=991234), sms='lol', url=12)
+id = User('M565656gg4524', 8955934029454)
+UserMessageTable(id[0])
+message(id[0])
+message(2)
+
+
+
+
 
 if __name__ == "__main__":
     import doctest
