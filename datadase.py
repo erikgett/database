@@ -1,13 +1,11 @@
 """
 ТЕСТЫ
-ы
-Maga 89995490719
 
->>> UserMessageTable(1)
-таблица пользователя создана
+
 
 """
-#>>> User('Maga', 89995490719)
+
+
 import sqlite3
 from sqlite3 import Error
 
@@ -17,24 +15,17 @@ with sqlite3.connect('database.db') as db:
 
     cursor = db.cursor()
 
-    query = """
-    CREATE TABLE IF NOT EXISTS users(
     query = '''
-    CREATE TABLE IF NOT EXISTS usersf(
+    CREATE TABLE IF NOT EXISTS users(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         Username TEXT(50),
         Num TEXT(15))      
-    """
+    '''
     cursor.execute(query)
-    cursor.execute("INSERT INTO usersf VALUES(1, 'John', 700 )")
-    print(155)
 
 
 #   СОЗДАЕМ ЛОГИКУ СОЗДАНИЯ - ПОИСКА id  в базе данных проверки создан ли пользователь
 def User(Username='erik', Num=891234):
-    Username = input ( "Name: " )
-    Num = input ( "Num: " )
-
     try:
         db = sqlite3.connect ( "database.db" )
         cursor = db.cursor()
@@ -51,23 +42,27 @@ def User(Username='erik', Num=891234):
     except sqlite3.Error as e:
         print("Error", e)
     finally:
+        return Id
         cursor.close()
         db.close()
 
 
 
 #   СОЗДАЕМ ДЛЯ ПОЛЬЗОВАТЕЛЯ ТАБЛИЦУ С ЕГО СООБЩЕНИЯМИ
-def UserMessageTable(identifier =15, sms = '234'):
-    print(identifier)
+def UserMessageTable(identifier=15, sms='23445', url=12):
     db = sqlite3.connect('database.db')
     cursor = db.cursor()
-    query ='CREATE TABLE IF NOT EXISTS Users(id INTEGER PRIMARY KEY AUTOINCREMENT, name text)'
+
+    query = 'CREATE TABLE IF NOT EXISTS UsersSms_'+str(identifier)+'(id INTEGER PRIMARY KEY AUTOINCREMENT, sms TEXT, url TEXT)'
     cursor.execute(query)
+    db.commit()
+
+    values = [sms, url]
+    cursor.execute('INSERT INTO UsersSms_'+str(identifier)+'(sms, url) VALUES(?, ?)', values)
     db.commit()
     db.close()
 
-UserMessageTable()
-User()
+UserMessageTable(User('Maga', Num=991234), sms='lol', url=12)
 
 if __name__ == "__main__":
     import doctest

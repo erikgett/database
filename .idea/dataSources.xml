@@ -7,11 +7,11 @@
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:identifier.sqlite</jdbc-url>
     </data-source>
-    <data-source source="LOCAL" name="database" uuid="2f6700f8-8148-43f2-b1d6-6bd88b7b3810">
+    <data-source source="LOCAL" name="database" uuid="765156cb-b6d2-49bd-ab71-277754dbb110">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:E:\Users\Магомед\PycharmProjects\database\database.db</jdbc-url>
+      <jdbc-url>jdbc:sqlite:C:\Users\erik_\PycharmProjects\database\database.db</jdbc-url>
       <libraries>
         <library>
           <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/Xerial SQLiteJDBC/3.31.1/license.txt</url>
