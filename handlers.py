@@ -1,7 +1,7 @@
 from main import bot, dp
 from aiogram.types import Message
 from config import admin_id
-import database
+from database import PushUserSmsInDb
 
 
 async def send_to_admin(*args) :
@@ -17,8 +17,8 @@ async def echo(message: Message) :
     wat4 = f"ваша фамилия: {message.from_user.last_name} \n"
     wat5 = f"ваш ник: {message.from_user.username} \n"
     wat6 = f"id сообщения: {message.message_id} \n"
+    PushUserSmsInDb(message)
 
-    print ( message )
     await message.reply ( text=text + wat + wat2 + wat3 + wat4 + wat5 + wat6 )
 
 
