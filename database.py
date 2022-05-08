@@ -54,7 +54,7 @@ def UserMessageTable(message):
 
 
 #   СОЗДАНИЕ ФУНКЦИИ ВЫВОДА ИНФОРМАЦИИ ПО ID
-def message(identifier=1234):
+def ShowUserMessage(identifier=1234):
     db = sqlite3.connect('database.db')
     cursor = db.cursor()
     sql_select_query = "SELECT * FROM UsersSms_" + str(identifier) + ""
