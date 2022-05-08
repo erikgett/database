@@ -34,18 +34,12 @@ async def handle_docs_photo(message) :
 
 @dp.message_handler ( content_types=['video'] )
 async def video_file_id(message) :
-    await bot.send_message ( message.from_user.id, "Ваше id video" )
-    await message.answer ( message.video.file_id )
-    print ( message.video.file_id )
+    print (message)
 
 @dp.message_handler ( content_types=['audio'] )
 async def audio_file_id(message) :
-    await bot.send_message ( message.from_user.id, "Ваше id audio" )
-    await message.answer ( message.audio.file_id )
-    print ( message.audio.file_id )
+    print (message)
 
 @dp.message_handler ( content_types=['sticker'] )
 async def sticker_file_id(message) :
-    await bot.send_message ( message.from_user.id, "Ваше id stiker" )
-    await message.answer ( message.sticker.file_id )
-    print ( message.sticker.file_id )
+    print ( message )
