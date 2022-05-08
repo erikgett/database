@@ -8,12 +8,14 @@ async def send_to_admin(*args):
     await bot.send_message(chat_id=admin_id, text="Бот запущен")
 
 
-@dp.message_handler(content_types=['photo', 'text', 'video', 'audio', 'sticker'])
-async def printing(message):
-    print(message)
-    PushUserSmsInDb(message)
-    ShowUserMessage(message.from_user.id)
-    await message.reply(text=message)
+# @dp.message_handler(content_types=['photo', 'text', 'video', 'audio', 'sticker'])
+# async def printing(message):
+#     print ( )
+#     print ( )
+#     print(message)
+#     PushUserSmsInDb(message)
+#     ShowUserMessage(message.from_user.id)
+#     await message.reply(text=message)
 
 
 @dp.message_handler()
@@ -25,29 +27,50 @@ async def echo(message: Message):
     wat4 = f"ваша фамилия: {message.from_user.last_name} \n"
     wat5 = f"ваш ник: {message.from_user.username} \n"
     wat6 = f"id сообщения: {message.message_id} \n"
-
+    message_text = message.text
+    file_id = 'none'
+    file_type = 'text'
+    PushUserSmsInDb ( message, file_id , file_type , message_text)
     await message.reply(text=text + wat + wat2 + wat3 + wat4 + wat5 + wat6)
-
 
 @dp.message_handler(content_types=['photo', 'text'])
 async def handle_docs_photo(message):
     photo_id = message.photo[-1].file_id
-    caption = f"привет писака: {message.caption}"
-    await bot.send_photo(message.from_user.id, photo_id)
-    await bot.send_photo(-454011048, photo_id)
-    await message.reply(text=caption)
 
+    print ( )
+    print ( )
+    print(message.photo[-1].file_id)
+    file_id = message.photo[-1].file_id
+    file_type = 'photo'
+    message_text = message.caption
+    PushUserSmsInDb ( message ,file_id, file_type,message_text)
 
 @dp.message_handler(content_types=['video'])
 async def video_file_id(message):
-    print()
-
+    print ( )
+    print ( )
+    print(message.video.thumb.file_id)
+    file_id = message.video.thumb.file_id
+    file_type = 'video'
+    message_text = message.caption
+    PushUserSmsInDb ( message, file_id, file_type,message_text)
 
 @dp.message_handler(content_types=['audio'])
 async def audio_file_id(message):
-    print()
-
+    print ( )
+    print ( )
+    print(message.audio.file_id)
+    file_id = message.audio.file_id
+    file_type = 'audio'
+    message_text = message.caption
+    PushUserSmsInDb ( message, file_id, file_type,message_text)
 
 @dp.message_handler(content_types=['sticker'])
 async def sticker_file_id(message):
     print()
+    print ( )
+    print(message.sticker.thumb.file_id)
+    file_id=message.sticker.thumb.file_id
+    file_type = 'sticker'
+    message_text = message.caption
+    PushUserSmsInDb ( message, file_id, file_type,message_text)

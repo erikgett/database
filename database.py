@@ -39,15 +39,15 @@ def User(message):
 
 
 #   СОЗДАЕМ ДЛЯ ПОЛЬЗОВАТЕЛЯ ТАБЛИЦУ С ЕГО СООБЩЕНИЯМИ
-def UserMessageTable(message):
+def UserMessageTable(message,file_id,file_type,message_text):
     db = sqlite3.connect('database.db')
     cursor = db.cursor()
 
     cursor.execute('CREATE TABLE IF NOT EXISTS UsersSms_' + str(
-        message.from_user.id) + '(id INTEGER PRIMARY KEY AUTOINCREMENT, sms TEXT, data TEXT, url TEXT)')
+        message.from_user.id) + '(id INTEGER PRIMARY KEY AUTOINCREMENT, sms TEXT, data TEXT, file_id TEXT, file_type TEXT)')
     db.commit()
-    values = [message.text, message.date, message.message_id]
-    cursor.execute('INSERT INTO UsersSms_' + str(message.from_user.id) + '(sms, data, url) VALUES(?, ?, ?)', values)
+    values = [message_text , message.date , file_id , file_type]
+    cursor.execute('INSERT INTO UsersSms_' + str(message.from_user.id) + '(sms, data, file_id, file_type) VALUES(?, ?, ?, ?)', values)
 
     db.commit()
     db.close()
@@ -63,9 +63,9 @@ def ShowUserMessage(identifier=1234):
     print(record)
 
 
-def PushUserSmsInDb(message):
+def PushUserSmsInDb(message,file_id, file_type,message_text):
     User(message)
-    UserMessageTable(message)
+    UserMessageTable(message, file_id, file_type,message_text)
 
 
 if __name__ == "__main__":
