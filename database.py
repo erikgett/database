@@ -10,12 +10,7 @@ import sqlite3
 #  СОЗДАЁМ ТАБЛИЦУ ПОЛЬЗОВАТЕЛЕЙ
 with sqlite3.connect('database.db') as db:
     cursor = db.cursor()
-    query = '''
-    CREATE TABLE IF NOT EXISTS users(
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        Username TEXT(50),
-        Num TEXT(15))      
-    '''
+    query = 'CREATE TABLE IF NOT EXISTS users(id INTEGER PRIMARY KEY AUTOINCREMENT,Username TEXT(50),Num TEXT(15))'
     cursor.execute(query)
 
 #   СОЗДАЕМ ЛОГИКУ СОЗДАНИЯ - ПОИСКА id  в базе данных проверки создан ли пользователь
@@ -67,10 +62,11 @@ def message(identifier=1234):
     record = cursor.fetchall()
     print(record)
 
-id = User('M565656gg4524', 8955934029454)
-UserMessageTable(id[0])
-message(id[0])
-message(2)
+def all():
+    id = User('M565656gg4524', 8955934029454)
+    UserMessageTable(id[0])
+    message(id[0])
+    message(2)
 
 
 
