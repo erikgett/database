@@ -16,7 +16,7 @@ async def echo(message: Message):
     wat4 = f"ваша фамилия: {message.from_user.last_name} \n"
     wat5 = f"ваш ник: {message.from_user.username} \n"
     wat6 = f"id сообщения: {message.message_id} \n"
-    print(message.photo)
+    print(message)
 
     await message.reply(text=text + wat + wat2+ wat3+ wat4+ wat5+ wat6)
     return wat2
