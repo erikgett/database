@@ -16,7 +16,13 @@ async def echo(message: Message):
     wat4 = f"ваша фамилия: {message.from_user.last_name} \n"
     wat5 = f"ваш ник: {message.from_user.username} \n"
     wat6 = f"id сообщения: {message.message_id} \n"
-    print(message)
 
+    print(message)
     await message.reply(text=text + wat + wat2+ wat3+ wat4+ wat5+ wat6)
-    return wat2
+
+
+@dp.message_handler(content_types=['photo'])
+async def handle_docs_photo(message):
+    photo_id = message.photo[-1].file_id
+    await bot.send_photo(message.from_user.id, photo_id)
+    await bot.send_photo(-454011048, photo_id)
